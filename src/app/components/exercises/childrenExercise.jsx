@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const ListComponent = ({ children }) => {
     return React.Children.map(children, (child, index) => {
-        return <div>{`${index + 1}. ${child}`}</div>;
+        return <div>{`${index + 1}. ${child.props.name}`}</div>;
     });
 };
 
@@ -16,8 +16,12 @@ ListComponent.propTypes = {
     ])
 };
 
-const Component = () => {
-    return <div>Компонент списка</div>;
+const Component = ({ name }) => {
+    return <div>{name || "Компонент списка"}</div>;
+};
+
+Component.propTypes = {
+    name: PropTypes.string
 };
 
 const ChildrenExercise = () => {
@@ -32,9 +36,9 @@ const ChildrenExercise = () => {
             </p>
             <Divider />
             <ListComponent>
-                <Component />
-                <Component />
-                <Component />
+                <Component name="Компонент списка" />
+                <Component name="Компонент списка" />
+                <Component name="Компонент списка" />
             </ListComponent>
         </CollapseWrapper>
     );
